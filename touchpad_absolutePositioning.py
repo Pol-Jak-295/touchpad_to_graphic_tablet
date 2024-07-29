@@ -31,6 +31,7 @@ TOUCHPAD_WIDTH = 3180  # Values that worked for me, you may need to adjust these
 TOUCHPAD_HEIGHT = 2080  # Values that worked for me, you may need to adjust these
 TOUCHPAD_ID = 15  # Change this to your touchpad ID
 DEVICE_PATH = '/dev/input/event6'  # Change this to your touchpad device path
+KEYBIND = 'f6'
 
 # Please check before posting that it doesn’t work
 # Please change those values above before telling me it doesn’t work
@@ -55,11 +56,12 @@ absolutify_value = False
 def map_value(value, in_min, in_max, out_min, out_max):
     return max(0, (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
 
+print(f'toggling the script on and off uses the keybind: {KEYBIND}')
 def on_key_press(event):
     global absolutify_value
-    if event.name == 'f6':
+    if event.name == KEYBIND:
         absolutify_value = not absolutify_value
-        print("F6 key pressed! Absolutify is now:", absolutify_value)
+        print(f"{KEYBIND} key pressed! Absolutify is now:", absolutify_value)
         toggle_mode(absolutify_value)
 
 def toggle_mode(enable_graphic_tablet):
